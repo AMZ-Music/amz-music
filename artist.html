@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AMZ Music - Artista</title>
+
+<style>
+
+body{
+margin:0;
+background:black;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url("AMZ.png") center center no-repeat;
+background-size:100%;
+opacity: 0.5;
+pointer-events:none;
+}
+
+.container{
+max-width:480px;
+margin:auto;
+padding:20px;
+}
+
+.artist-logo{
+width:200px;
+margin-top:30px;
+}
+
+.song{
+border-bottom:1px solid #D4AF37;
+padding:20px 0;
+}
+
+.song-title{
+font-size:18px;
+margin-bottom:10px;
+}
+
+button{
+padding:10px 20px;
+margin:5px;
+border:none;
+cursor:pointer;
+font-weight:bold;
+}
+
+.preview{
+background:#D4AF37;
+color:black;
+}
+
+.download{
+background:black;
+color:#D4AF37;
+border:1px solid #D4AF37;
+}
+
+button:hover{
+opacity:0.8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="profecia.png" class="artist-logo">
+
+<h2>Artista Exclusivo</h2>
+
+
+<audio id="player"></audio>
+
+<script>
+
+async function loadArtist(){
+
+const params = new URLSearchParams(window.location.search)
+
+const artistId = params.get("artist")
+
+if(!artistId){
+document.body.innerHTML = "Artista no especificado"
+return
+}
+
+const response = await fetch("artists.json")
+
+const artists = await response.json()
+
+const artist = artists[artistId]
+
+if(!artist){
+document.body.innerHTML = "Artista no encontrado"
+return
+}
+
+document.querySelector(".artist-logo").src = artist.logo
+
+document.querySelector("h2").innerText = artist.name
+
+const container = document.querySelector(".container")
+
+artist.songs.forEach(song => {
+
+const div = document.createElement("div")
+
+div.className = "song"
+
+div.innerHTML = `
+<div class="song-title">${song.title}</div>
+
+<button class="preview" onclick="playPreview('${song.preview}')">
+▶ Preview
+</button>
+
+<button class="download" onclick="downloadSong('${song.file}')">
+⬇ Descargar
+</button>
+`
+
+container.appendChild(div)
+
+})
+
+}
+
+
+
+function playPreview(file){
+
+let audio = document.getElementById("player")
+
+audio.src = file
+
+audio.currentTime = 0
+
+audio.play()
+
+setTimeout(()=>{
+audio.pause()
+},60000)
+
+}
+
+
+
+function downloadSong(file){
+
+window.location.href = file
+
+}
+
+
+
+loadArtist()
+
+</script>
+
+</body>
+
+</html>

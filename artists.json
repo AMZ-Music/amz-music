@@ -1,0 +1,53 @@
+{
+  "grupo1": {
+    "name": "La Profecía",
+    "logo": "profecia.png",
+    "songs": [
+      {
+        "title": "El H",
+        "preview": "El H.mp3",
+        "file": "El H.mp3"
+      },
+      {
+        "title": "Con La Novedad",
+        "preview": "Con la novedad.mp3",
+        "file": "Con la novedad.mp3"
+      },
+      {
+        "title": "No Hay Novedad",
+        "preview": "No Hay Novedad.mp3",
+        "file": "No Hay Novedad.mp3"
+      },
+
+      {
+        "title": "Excesos",
+        "preview": "excesos.mp3",
+        "file": "excesos.mp3"
+      }
+    ]
+  },
+
+  "grupo2": {
+    "name": "Kodigo 3",
+    "logo": "k3.png",
+    "songs": [
+      {
+        "title": "F y R",
+        "preview": "audio/previewA.mp3",
+        "file": "audio/songA.mp3"
+      }
+    ]
+  },
+
+  "grupo3": {
+"name": "yo me jalo",
+"logo": "yomejalo.png",
+"songs": [
+{
+"title": "Canción 1",
+"preview": "audio/preview.mp3",
+"file": "audio/song.mp3"
+}
+]
+}
+}
