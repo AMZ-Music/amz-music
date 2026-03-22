@@ -93,13 +93,13 @@ document.getElementById("result").value = json
 
 
 
-
+ 
 
 function generateQR(){
 
 let artistId = document.getElementById("artistId").value
 
-let url = "http://192.168.100.10:5500/artist.html?artist=" + artistId
+let url = "https://amz-music.github.io/amz-music/artist.html?artist=" + artistId
 
 document.getElementById("qrcode").innerHTML = ""
 
@@ -108,6 +108,24 @@ new QRCode(document.getElementById("qrcode"), {
     width: 200,
     height: 200
 })
+
+}
+    <button onclick="downloadQR()">Descargar QR</button>
+
+function downloadQR(){
+
+let qrCanvas = document.querySelector("#qrcode canvas")
+
+if(!qrCanvas){
+alert("Primero genera el QR")
+return
+}
+
+let link = document.createElement("a")
+link.download = "qr_artista.png"
+link.href = qrCanvas.toDataURL()
+
+link.click()
 
 }
 
