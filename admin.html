@@ -51,6 +51,19 @@ margin-top:20px;
 
 <body>
 
+    <script>
+
+let password = "amz123"  // ← cambia esta contraseña
+
+let userPass = prompt("Ingresa la contraseña")
+
+if(userPass !== password){
+    alert("Acceso denegado")
+    window.location.href = "index.html"
+}
+
+</script>
+
 <div class="container">
 
 <h1>Panel Administrador AMZ</h1>
@@ -61,6 +74,7 @@ margin-top:20px;
 
 <button onclick="generateArtist()">Generar artista</button>
 <button onclick="generateQR()">Generar QR</button>
+<button onclick="downloadQR()">Descargar QR</button>
 <div id="qrcode" style="margin-top:30px;"></div>
 
 <textarea id="result"></textarea>
@@ -93,13 +107,13 @@ document.getElementById("result").value = json
 
 
 
- 
+
 
 function generateQR(){
 
 let artistId = document.getElementById("artistId").value
 
-let url = "https://amz-music.github.io/amz-music/artist.html?artist=" + artistId
+let url = "http://192.168.100.10:5500/artist.html?artist=" + artistId
 
 document.getElementById("qrcode").innerHTML = ""
 
@@ -110,7 +124,8 @@ new QRCode(document.getElementById("qrcode"), {
 })
 
 }
-    <button onclick="downloadQR()">Descargar QR</button>
+
+
 
 function downloadQR(){
 
