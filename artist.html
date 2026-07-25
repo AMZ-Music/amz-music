@@ -129,8 +129,8 @@ div.className = "song"
 div.innerHTML = `
 <div class="song-title">${song.title}</div>
 
-<button class="preview" onclick="playPreview('${song.preview}')">
-▶ Preview
+<button onclick="playPreview('${song.preview}', this)">
+    ▶ Preview
 </button>
 
 <button class="download" onclick="downloadSong('${song.file}')">
@@ -146,19 +146,52 @@ container.appendChild(div)
 
 
 
-function playPreview(file){
+let currentAudio = null;
+let currentButton = null;
 
-let audio = document.getElementById("player")
+function playPreview(file, button){
 
-audio.src = file
+    // Si no hay audio o es una canción distinta
+    if(currentAudio === null || currentAudio.src !== new Audio(file).src){
 
-audio.currentTime = 0
+        // Detener la anterior
+        if(currentAudio){
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
 
-audio.play()
+            if(currentButton){
+                currentButton.innerHTML = "▶ Preview";
+            }
+        }
 
-setTimeout(()=>{
-audio.pause()
-},60000)
+        currentAudio = new Audio(file);
+        currentButton = button;
+
+        currentAudio.play();
+
+        button.innerHTML = "⏸ Pausar";
+
+        currentAudio.onended = function(){
+            button.innerHTML = "▶ Preview";
+            currentAudio = null;
+            currentButton = null;
+        }
+
+        return;
+    }
+
+    // Si es la misma canción
+    if(currentAudio.paused){
+
+        currentAudio.play();
+        button.innerHTML = "⏸ Pausar";
+
+    }else{
+
+        currentAudio.pause();
+        button.innerHTML = "▶ Preview";
+
+    }
 
 }
 
