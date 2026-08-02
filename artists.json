@@ -33,9 +33,20 @@
     "songs": [
       {
         "title": "F y R",
-        "preview": "audio/previewA.mp3",
-        "file": "audio/songA.mp3"
+        "preview": "F Y R.mp3",
+        "file": "F Y R.mp3"
+      },
+      {
+        "title": "Yo Me Jalo",
+        "preview": "Yo Me Jalo.mp3",
+        "file": "Yo Me Jalo.mp3"
+      },
+       {
+        "title": "Barbies",
+        "preview": "barbis.mp3",
+        "file": "barbis.mp3"
       }
+
     ]
   },
 
