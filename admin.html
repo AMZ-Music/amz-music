@@ -109,20 +109,30 @@ document.getElementById("result").value = json
 
 
 
-function generateQR(){
+function generateQR() {
+    const artistId = document.getElementById("artistId").value.trim();
 
-let artistId = document.getElementById("artistId").value
+    if (!artistId) {
+        alert("Ingresa el ID del artista");
+        return;
+    }
 
-let url = "http://192.168.100.10:5500/artist.html?artist=" + artistId
+    // Dirección pública de AMZ Music
+    const baseURL = "https://amz-music.github.io/amz-music/";
 
-document.getElementById("qrcode").innerHTML = ""
+    // Página del artista que abrirá el código QR
+    const url = baseURL + "artist.html?artist=" + encodeURIComponent(artistId);
 
-new QRCode(document.getElementById("qrcode"), {
-    text: url,
-    width: 200,
-    height: 200
-})
+    // Limpiar el QR anterior
+    const qrContainer = document.getElementById("qrcode");
+    qrContainer.innerHTML = "";
 
+    // Crear el nuevo QR
+    new QRCode(qrContainer, {
+        text: url,
+        width: 300,
+        height: 300
+    });
 }
 
 
